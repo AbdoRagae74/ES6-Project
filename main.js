@@ -1,6 +1,7 @@
 import { User } from "./utils.js";
 
-if(localStorage.getItem("currentUserName")!="NULL")  location.replace("homepage.html");
+if(localStorage.getItem("currentUserName")!="NULL"  && localStorage.getItem("currentUserName")!= undefined )  location.replace("homepage.html");
+
 var loginButton = document.querySelector("#loginBtn");
 var emailInp = document.querySelector("#email");
 var passwordInp = document.querySelector("#password");
