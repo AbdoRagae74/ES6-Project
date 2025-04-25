@@ -50,6 +50,7 @@ btn.onclick = function () {
       icon: 'success',
       confirmButtonText: 'OK'
     });
+if(userCart)
 document.getElementById("cart-cnt").innerText = userCart.items.length+1;
 
 }

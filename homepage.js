@@ -351,6 +351,7 @@ logout.onclick = function () {
   localStorage.setItem("currentUserName", "NULL");
   location.replace("index.html");
 }
+if(userCart)
 document.getElementById("cart-cnt").innerText = userCart.items.length;
 
 for (var i = 1; i <= 40; i++) {

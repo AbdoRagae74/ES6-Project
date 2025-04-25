@@ -20,7 +20,7 @@ for(var i of cart){
       break;
     }
 }
-
+if(userCart)
 document.getElementById("cart-cnt").innerText = userCart.items.length;
 
 
