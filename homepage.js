@@ -366,8 +366,8 @@ for (var i = 1; i <= 40; i++) {
       </div>
       `
        Item = false;
+       if(userCart)
       for(var item of userCart.items  ){
-        // console.log(i.id);
         if(item.id == products[i].id) {Item = true;}
       }
       if(!Item)
@@ -408,8 +408,17 @@ function changeDisplayedProducts(cat,value) {
       <h5> ${products[i].title}</h5>    
       <h4>Price ${products[i].price}$</h4>            
       </div>
-      <button alt="${products[i].id}" class="btn btn-primary col-1 cart" type="button">add to cart</button>
       `
+      Item = false;
+       if(userCart)
+      for(var item of userCart.items  ){
+        if(item.id == products[i].id) {Item = true;}
+      }
+      if(!Item)
+      productCard.innerHTML+= `<button alt="${products[i].id}" class=" cart-btn col-1 cart" type="button">Add to cart</button>`;
+    else
+    productCard.innerHTML+= `<button disabled alt="${products[i].id}" class=" cart-btn-added col-1 cart" type="button">Added to cart</button>`;
+
       productContainer.appendChild(productCard);
     }
   }
