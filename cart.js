@@ -20,6 +20,12 @@ for(var i of cart){
       break;
     }
 }
+
+document.getElementById("cart-cnt").innerText = userCart.items.length;
+
+
+
+
 const userIndex = cart.findIndex(item => item.mail === localStorage.currentUser);
 
   function renderCart() {
@@ -80,7 +86,15 @@ const userIndex = cart.findIndex(item => item.mail === localStorage.currentUser)
       // console.log(id);
       userCart.items = userCart.items.filter(item => { return item.id != id;});
       cart[userIndex] = userCart; 
+      document.getElementById("cart-cnt").innerText = cart[userIndex].items.length;
       localStorage.setItem('carts', JSON.stringify(cart));
+      Swal.fire({
+        title: 'Removed!',
+        text: 'Item has been removed from your cart.',
+        icon: 'warning',
+        confirmButtonText: 'OK',
+        confirmButtonColor: '#d33'
+      });
       renderCart();
     }
 

@@ -339,12 +339,19 @@ const userName = localStorage.getItem("currentUserName");
 const logout = document.getElementById("log-out");
 const selectCategory = document.getElementById("select-category");
 const priceInput = document.getElementById("priceInp");
-// console.log(selectCategory);
+
+var userCart = JSON.parse(localStorage.getItem("carts")) || [];
+
+userCart =  userCart.filter(element=>{
+return element.mail == localStorage.getItem("currentUser");
+});
+userCart = userCart[0];
 name.innerText = userName;
 logout.onclick = function () {
   localStorage.setItem("currentUserName", "NULL");
   location.replace("index.html");
 }
+document.getElementById("cart-cnt").innerText = userCart.items.length;
 
 for (var i = 1; i <= 40; i++) {
   const productCard = document.createElement('div');
@@ -356,9 +363,17 @@ for (var i = 1; i <= 40; i++) {
                     <h5> ${products[i].title}</h5>    
                     <h4>Price ${products[i].price}$</h4>            
       </div>
-      <button alt="${products[i].id}" class="btn btn-primary col-1 cart" type="button">add to cart</button>
-      
       `
+       Item = false;
+      for(var item of userCart.items  ){
+        // console.log(i.id);
+        if(item.id == products[i].id) {Item = true;}
+      }
+      if(!Item)
+      productCard.innerHTML+= `<button alt="${products[i].id}" class=" cart-btn col-1 cart" type="button">Add to cart</button>`;
+    else
+    productCard.innerHTML+= `<button disabled alt="${products[i].id}" class=" cart-btn-added col-1 cart" type="button">Added to cart</button>`;
+
   productContainer.appendChild(productCard);
 }
 setOnClickForImages();
@@ -414,13 +429,17 @@ document.addEventListener('DOMContentLoaded', function () {
 
   document.querySelector('.pro-container').addEventListener('click', function (e) {
     if (e.target.classList.contains('cart')) {
-      // Find the closest product card parent
+      const btn = e.target;
+      // btn.disabled = true;
+      btn.classList.remove('cart-btn');
+      btn.classList.add('cart-btn-added');
+      btn.innerHTML = 'Added to cart';
+      btn.disabled = true;
       const productCard = e.target.closest('.pro');
       const img = productCard.querySelector('.product-img');
       let itemToCart = img.alt;
       let user = localStorage.currentUser;
-      let usersCartsData = JSON.parse(localStorage.getItem("carts")) || [];
-  
+      let usersCartsData = JSON.parse(localStorage.getItem("carts")) || [];  
   
       let newItem = {
         id: itemToCart,
@@ -430,28 +449,36 @@ document.addEventListener('DOMContentLoaded', function () {
         mail: user,
         items: [newItem]
       }
+      var items;
       var found = false;
       for (var i of usersCartsData) {
-        // console.log(i);
-        // break;
         if (i.mail == user) {
           found = true;
-          let foundInItems = false;
-          for (var item of i.items) {
-            if (item.id == itemToCart) { item.cnt++; foundInItems = true; break; }
-          }
-          if (!foundInItems) {
-            i.items.push(newItem);
-            break;
-          }
+          i.items.push(newItem);
+          items = i.items;
         }
       }
       if (!found)
-        usersCartsData.push(usercart);
+        {usersCartsData.push(usercart);
+          document.getElementById("cart-cnt").innerText = "1";
+        }
+        else
+        document.getElementById("cart-cnt").innerText = items.length;
+      console.log();
+
+
       localStorage.setItem("carts", JSON.stringify(usersCartsData));
-  
+
+      Swal.fire({
+        title: 'Added to Cart!',
+        text: 'This item has been added to your cart.',
+        icon: 'success',
+        confirmButtonText: 'OK'
+      });
     }
+   
   });
+
 
 
   const productContainer = document.querySelector('.product-container');

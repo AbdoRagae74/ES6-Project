@@ -369,18 +369,9 @@ export function addToCartLogic(mail) {
     var found = false;
 
     for (var i of usersCartsData) {
-        console.log(mail, user);
         if (i.mail == user) {
-            found = true;
-            let foundInItems = false;
-            for (var item of i.items) {
-                console.log(item.id, itemToCart);
-                if (item.id == itemToCart) { item.cnt++; console.log(item.cnt); foundInItems = true; break; }
-            }
-            if (!foundInItems) {
-                i.items.push(newItem);
-                break;
-            }
+            found = true;            
+            i.items.push(newItem);
         }
     }
 
