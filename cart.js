@@ -2,7 +2,7 @@ import { products } from "./utils.js";
 const name = document.getElementById("user-name");
 const userName = localStorage.getItem("currentUserName"); 
 const logout = document.getElementById("log-out");
-if (localStorage.getItem("currentUserName") == "NULL") location.replace("index.html");
+if (localStorage.getItem("currentUserName") == "NULL" || localStorage.getItem("currentUserName") == undefined) location.replace("index.html");
 
 name.innerText = userName;
 logout.onclick = function () {

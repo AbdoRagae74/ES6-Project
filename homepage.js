@@ -331,7 +331,7 @@ const products = [
   }
 ];
 
-if (localStorage.getItem("currentUserName") == "NULL") location.replace("index.html");
+if (localStorage.getItem("currentUserName") == "NULL" || localStorage.getItem("currentUserName") == undefined) location.replace("index.html");
 
 const productContainer = document.querySelector('.pro-container');
 const name = document.getElementById("user-name");

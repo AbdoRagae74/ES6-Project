@@ -1,7 +1,7 @@
 
 import { products, addToCartLogic } from "./utils.js";
 const productContainer = document.querySelector('.pro-container');
-if (localStorage.getItem("currentUserName") == "NULL") location.replace("index.html");
+if (localStorage.getItem("currentUserName") == "NULL" || localStorage.getItem("currentUserName") == undefined ) location.replace("index.html");
 
 var userCart = JSON.parse(localStorage.getItem("carts")) || [];
 
