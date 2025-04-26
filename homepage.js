@@ -365,7 +365,7 @@ for (var i = 1; i <= 40; i++) {
                     <h5> ${products[i].title}</h5>    
                     <h4>Price ${products[i].price}$</h4>  
                    <button id="${products[i].id}" class="view-btn"   title="Quick View">
-                      <i class="fas fa-eye fa-2x"></i></button>
+                    <i class="fas fa-eye fa-2x"></i></button>
       </div>
       `
        Item = false;
