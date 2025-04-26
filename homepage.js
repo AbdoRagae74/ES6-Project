@@ -357,7 +357,7 @@ document.getElementById("cart-cnt").innerText = userCart.items.length;
 for (var i = 1; i <= 40; i++) {
   const productCard = document.createElement('div');
   // productCard.className = 'pro';
-  productCard.className = 'col-12 col-sm-6 col-md-4 col-lg-3 mb-4 pro';
+  productCard.className = ' pro';
   productCard.innerHTML = `
        <img src="${products[i].img}"alt="${products[i].id}" class="product-img"  > 
        <div class="des">
