@@ -12,7 +12,7 @@ userCart = userCart[0];
 if(userCart)
 document.getElementById("cart-cnt").innerText = userCart.items.length;
 
-
+console.log(localStorage.clickedItem);
 
 const productCard = document.createElement('div');
 productCard.innerHTML = `

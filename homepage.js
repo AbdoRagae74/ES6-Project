@@ -357,13 +357,15 @@ document.getElementById("cart-cnt").innerText = userCart.items.length;
 for (var i = 1; i <= 40; i++) {
   const productCard = document.createElement('div');
   // productCard.className = 'pro';
-  productCard.className = ' pro';
+  productCard.className = '  pro';
   productCard.innerHTML = `
        <img src="${products[i].img}"alt="${products[i].id}" class="product-img"  > 
        <div class="des">
                     <span>${products[i].description}</span>
                     <h5> ${products[i].title}</h5>    
-                    <h4>Price ${products[i].price}$</h4>            
+                    <h4>Price ${products[i].price}$</h4>  
+                   <button id="${products[i].id}" class="view-btn"   title="Quick View">
+                      <i class="fas fa-eye fa-2x"></i></button>
       </div>
       `
        Item = false;
@@ -379,8 +381,20 @@ for (var i = 1; i <= 40; i++) {
   productContainer.appendChild(productCard);
 }
 setOnClickForImages();
+EyeOnClick();
+function EyeOnClick(){
+  const eye = document.querySelectorAll('.pro .view-btn');
+  eye.forEach(button => {
+    button.addEventListener('click', (e) => {
+      const clickedbutton = button;
+      const itemId = clickedbutton.id;
+      console.log(itemId);
+      localStorage.setItem("clickedItem", itemId);
+      location.href="item.html"
+    });
+  });
 
-
+}
 
 function setOnClickForImages() {
 
@@ -390,7 +404,7 @@ function setOnClickForImages() {
     img.addEventListener('click', (e) => {
       const clickedImage = e.target;
       const imgAlt = clickedImage.alt;
-      location.replace("item.html")
+      location.href="item.html"
       localStorage.setItem("clickedItem", imgAlt);
     });
   });
@@ -408,7 +422,9 @@ function changeDisplayedProducts(cat,value) {
       <div class="des">
      <span>${products[i].description}</span>
       <h5> ${products[i].title}</h5>    
-      <h4>Price ${products[i].price}$</h4>            
+      <h4>Price ${products[i].price}$</h4>       
+      <button class="view-btn" onclick="showQuickView(123)" title="Quick View">
+                      <i class="fas fa-eye fa-2x"></i></button>     
       </div>
       `
       Item = false;
