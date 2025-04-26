@@ -85,7 +85,14 @@ signbtn.addEventListener("click",(e)=>{
             valid = false;
     }
 
-    if(!valid) alert("Your data aren't correct! Please try again ");
+    if(!valid) 
+        Swal.fire({
+            title: 'Invalid data!',
+            text: 'Please enter valid data.',
+            icon: 'warning',
+            confirmButtonText: 'OK',
+            confirmButtonColor: '#d33'
+          });
     else {
         let usersData = JSON.parse(localStorage.getItem("users"))||[] ;
         usersData = usersData.map(user => User.fromObject(user));
@@ -97,18 +104,21 @@ signbtn.addEventListener("click",(e)=>{
             }
         });
         if(duplicated)
-            alert("U have an account! try to login instead ");
+            Swal.fire("U already have an account try to log in instead !");
         else{
-            alert("Your account created sucessfully")
-            location.replace("index.html");
-            var newUser = new User(usersData.length+1,nameSign.value,emailSign.value,passSign.value);
-            usersData.push(newUser);
-            localStorage.setItem("users",JSON.stringify(usersData));
-            console.log(usersData);
-            //Add user to cookies then go to home page
-            //Add his data with an id to identify user 
-            // data will be added to array of objects   
-
+            Swal.fire({
+                title: 'Account created!',
+                text: 'Your account created successfully.',
+                icon: 'success',
+                confirmButtonText: 'OK'
+            }).then((res)=>{
+                if(res.isConfirmed){
+                var newUser = new User(usersData.length+1,nameSign.value,emailSign.value,passSign.value);
+                usersData.push(newUser);
+                localStorage.setItem("users",JSON.stringify(usersData));
+                console.log(usersData);
+                location.replace("index.html");}
+            });
         }
         
     }

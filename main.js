@@ -31,7 +31,14 @@ loginButton.addEventListener("click", (e) => {
 
     }
 
-    else alert("Please login with valid data")
+    else        
+     Swal.fire({
+        title: 'Invalid data!',
+        text: 'Please enter valid data.',
+        icon: 'warning',
+        confirmButtonText: 'OK',
+        confirmButtonColor: '#d33'
+      });
 
 
 })
