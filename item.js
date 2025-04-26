@@ -9,7 +9,7 @@ userCart =  userCart.filter(element=>{
 return element.mail == localStorage.getItem("currentUser");
 });
 userCart = userCart[0];
-
+if(userCart)
 document.getElementById("cart-cnt").innerText = userCart.items.length;
 
 
