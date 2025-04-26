@@ -24,8 +24,8 @@ productCard.innerHTML = `
 </div>
 `
 var Item = false;
+if(userCart)
 for(var item of userCart.items  ){
-  // console.log(i.id);
   if(item.id == localStorage.clickedItem) {Item = true;}
 }
 if(!Item)
